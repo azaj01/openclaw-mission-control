@@ -4,7 +4,7 @@ import type {
   PropsWithChildren,
   ReactNode,
 } from "react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -53,6 +53,9 @@ describe("UserMenu", () => {
     clearLocalAuthTokenMock.mockReset();
     isLocalAuthModeMock.mockReset();
   });
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
 
   it("renders and opens local-mode menu actions", async () => {
     const user = userEvent.setup();
@@ -91,6 +94,5 @@ describe("UserMenu", () => {
 
     expect(clearLocalAuthTokenMock).toHaveBeenCalledTimes(1);
     expect(reloadSpy).toHaveBeenCalledTimes(1);
-    vi.unstubAllGlobals();
   });
 });
